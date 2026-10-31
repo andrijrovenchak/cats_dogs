@@ -4,6 +4,7 @@ title: "Code and data for the paper: Of Cats and Dogs: What Languages Do Mitocho
 authors:
   - family-names: Rovenchak
     given-names: Andrij
+    orcid: "https://orcid.org/0000-0002-0452-6873"
 version: 1.0.0
 date-released: 2026-10-31
 url: "https://github.com/andrijrovenchak/cats_dogs"
