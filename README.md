@@ -33,7 +33,7 @@ Reads `felidae.xlsx` and `canidae.xlsx` (sheet "… mtDNA links", column "Scient
 downloads all complete mitochondrial genomes of every species with
 `fetch_ncbi_mito_results.download_species_fastas` into `felidae_fastas/`, `canidae_fastas/`.
 The NCBI query date matters: record the date in the paper/README. The accessions
-actually used are listed in `data/accessions_all.csv`.
+actually used are listed in `accessions_all.csv`.
  
 ### 1a. Manual lookup
 Do manual lookup for species with empty FASTA sets, like
@@ -59,9 +59,7 @@ edit `PARENT_OF` to change this. Originals are never changed.
 Keeps one record per distinct sequence per species (RefSeq first, then the smallest accession).
  
 ### 3. Summary and tables
-    python summarize_fastas.py felidae_dedup canidae_dedup --out summary \
-           --expected-felidae felidae_species.txt --expected-canidae canidae_species.txt \
-           --verify-mtdna .
+    python summarize_fastas.py felidae_dedup canidae_dedup --out summary --verify-mtdna .
     python list_accessions.py felidae_dedup canidae_dedup
 The first script writes `records.csv`, `species.csv`, `accessions_supplement.csv`, the LaTeX tables and
 `checks.txt` (shared accessions, identical sequences across species, strand flags, odd lengths).
@@ -83,6 +81,8 @@ so that no species is in both training and test folds.
     python cats_dogs.py
 The flag `XLS_BUILT` at the top selects whether the matrices are computed 
 (`False`, slow: K2P uses global pairwise alignment) or read from the existing csv files (`True`).
+Set `XLS_BUILT = False` for the first run, which computes the matrices (note that K2P is slow and can run for several hours). 
+The script writes the `*_tree.nwk` files into the working directory, not `trees/`.
 For every family it builds Jaccard and Mash (13-mers), K2P, Euclidean (genomes), TF-IDF cosine,
 cosine and Euclidean on species-level vectors, builds the UPGMA trees, prints the Robinson-Foulds
 distance to the reference tree, and writes `*_tree.nwk`.
@@ -91,8 +91,8 @@ distance to the reference tree, and writes `*_tree.nwk`.
  
 ### 6. Figures
     python plot_distance_heatmaps.py [--suffix -28]
-    python tanglegram.py felidae                  # lowest-RF tree against the reference
-    python tanglegram.py canidae 28 --method tfidf
+    python tanglegram.py felidae --folder trees --reference trees/reference_trees.nwk                 # lowest-RF tree against the reference
+    python tanglegram.py canidae 28 --method tfidf --folder trees --reference trees/reference_trees.nwk
  
 ### 7. Maximum-likelihood trees (MAFFT + IQ-TREE)
 Run `notebooks/MAFFT_IQTREE.ipynb` in Google Colab (Ubuntu image; MAFFT and IQ-TREE come from `apt`).
