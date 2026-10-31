@@ -124,5 +124,3 @@ Run `notebooks/extract_mtdna_SRX30196846.ipynb` (Colab; SRX30196846 = SRR3508348
 * Distances between species: mean of the distances between sampled records; the diagonal is the
   largest within-species distance.
 * Only the topology of the UPGMA trees is used.
- 
-Claude finished the response
