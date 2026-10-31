@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite it as below."
+title: "Code and data for the paper: Of Cats and Dogs: What Languages Do Mitochondrions Speak? A Vector-Space Analysis of mtDNA Vocabulary"
+authors:
+  - family-names: Rovenchak
+    given-names: Andrij
+version: 1.0.0
+date-released: 2026-10-31
+url: "https://github.com/andrijrovenchak/cats_dogs"
