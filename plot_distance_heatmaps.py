@@ -16,6 +16,7 @@ Usage (in the folder with the csv files):
     python plot_distance_heatmaps.py                     # both families, suffix ''
     python plot_distance_heatmaps.py --suffix -28        # files like canidae_k2p_matrix-28.csv
 """
+import sys
 import argparse
 import re
 
@@ -161,7 +162,7 @@ def draw_heatmap1(ax, df, title, cmap="YlOrRd", pct=95, fs=8, species_fs=6):
     n = len(order)
     #ep = [f"{o[0]}. {o.split('_', 1)[1]}" for o in order]     # e.g. "P. tigris"
     ep = [short_label(o) for o in order]
-    
+
     # genus names: left of the axis, 4 pt away
     tr = offset_copy(ax.get_yaxis_transform(), fig=ax.figure, x=-4, y=0, units="points")
     for g, a, b in genus_blocks(order):
@@ -248,14 +249,19 @@ def gap_plot(family, suffix, mats, order, counts):
 
 
 if __name__ == "__main__":
-    panel1('felidae', 'k2p', '')
-    panel1('canidae', 'jaccard', '-k13-28')
-    exit(0)
-
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--suffix", default="", help="e.g. -28 for canidae_k2p_matrix-28.csv")
-    ap.add_argument("--families", nargs="+", default=["felidae", "canidae"])
-    ap.add_argument("--fasta-dir", default=None, help="folder with the species FASTA files (default <family>_dedup)")
-    args = ap.parse_args()
-    for fam in args.families:
-        panels(fam, args.suffix, args.fasta_dir)
+    # The two panels of the paper. 
+    # Before running, rename the Canidae matrices so that the suffix gives the species count:
+    #   canidae_jaccard_matrix-k13.csv -> canidae_jaccard_matrix-k13-28.csv
+    #   (the same for the other Canidae matrices: canidae_k2p_matrix.csv -> canidae_k2p_matrix-28.csv, etc.)
+    if len(sys.argv) == 1:
+        panel1('felidae', 'k2p', '')
+        panel1('canidae', 'jaccard', '-k13-28')
+    else:
+        # General use: all heatmaps of the chosen families (see the README)
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--suffix", default="", help="e.g. -28 for canidae_k2p_matrix-28.csv")
+        ap.add_argument("--families", nargs="+", default=["felidae", "canidae"])
+        ap.add_argument("--fasta-dir", default=None, help="folder with the species FASTA files (default <family>_dedup)")
+        args = ap.parse_args()
+        for fam in args.families:
+            panels(fam, args.suffix, args.fasta_dir)
