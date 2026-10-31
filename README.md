@@ -32,8 +32,10 @@ Run every script in the folder that contains `mtdna.py` and the FASTA folders
 Reads `felidae.xlsx` and `canidae.xlsx` (sheet "… mtDNA links", column "Scientific name") and
 downloads all complete mitochondrial genomes of every species with
 `fetch_ncbi_mito_results.download_species_fastas` into `felidae_fastas/`, `canidae_fastas/`.
-The NCBI query date matters: record the date in the paper/README. The accessions
-actually used are listed in `accessions_all.csv`.
+The NCBI query date matters: the original queries were run on 27 September 2026 for Felidae and 5 October 2026 for Canidae. 
+A new run returns the records that exist at that time, so it can differ from the collection used here
+(new submissions, changed records). To reproduce the results, start from the `*_dedup` folders in this
+repository (step 3 onward) or check a new download against `accessions_all.csv`.
  
 ### 1a. Manual lookup
 Do manual lookup for species with empty FASTA sets, like
