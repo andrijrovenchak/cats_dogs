@@ -89,6 +89,7 @@ The script writes the `*_tree.nwk` files into the working directory, not `trees/
 For every family it builds Jaccard and Mash (13-mers), K2P, Euclidean (genomes), TF-IDF cosine,
 cosine and Euclidean on species-level vectors, builds the UPGMA trees, prints the Robinson-Foulds
 distance to the reference tree, and writes `*_tree.nwk`.
+
     python check_jaccard_kmers.py        # RF distance as a function of k (3-21)
     python pretty_newick.py in.nwk out.nwk   # drop the unary root, tidy format
  
