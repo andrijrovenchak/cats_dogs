@@ -24,6 +24,7 @@ Run every script in the folder that contains `mtdna.py` and the FASTA folders
 | `{family}_{distance}_matrix[-k13].csv` | species-by-species distance matrices |
 | `{family}{n if canidae}_{method}_tree.nwk` | UPGMA trees (`canidae29_…` with *L. adusta*, `canidae28_…` without) |
 | `reference_trees.nwk` | reference topologies (headers are the keys used by `tanglegram.py`) |
+| `supplementary.pdf` | supplemetary matrial for the manuscript |
  
 ## Steps
  
